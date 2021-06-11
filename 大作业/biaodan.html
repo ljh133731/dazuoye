@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <hr/>
+    <div style='float:left'>
+<img src='1.jpg' style="width: 40px; height: 40px; margin: 0px;">
+<textarea style="height: 300px; width: 500px; ">
+
+</textarea>
+<button id='fab' onclick="fb()">评论</button>
+    </div>
+    <script>var profile= document.getElementById('profile');
+        var imgData=null;
+        profile.addEventListener('dragover',function(e){
+              e.preventDefault();
+             })
+             profile.addEventListener('drop',function(e){
+             var fileObj = e.dataTransfer.files[0];
+             var reader = new FileReader();
+             reader.readAsDataURL(fileObj);
+             reader.onload=function(){
+                 var imgData=reader.result;
+                 var imgNode=document.createElement('img');
+                 imgNode.src=imgData;
+                 imgNode.style.width='64px';
+                 imgNode.style.height='64px';
+                 profile.src=imgData;   
+             }
+         })
+         document.ondrop=function(e){
+             e.preventDefault();
+         }
+         var reg=document.getElementById('reg')
+         window.onload=function(){
+             var uname=document.getElementById('username').value;
+             var studentid=document.getElementById('studentid').value;
+             var age=document.getElementById('age').value;
+             var pic=profile.src;
+             localStorage('username',uname.value);
+             localStorage('studentid',studentid.value);
+             localStorage('age',age.value);
+             localStorage('pic',pic);
+         }
+         reg.onclick=function(){
+             if (localStorage.getItem('uname')){
+             uname.value=(localStorage.getItem('uname'))
+             if (localStorage.getItem('studentid')){
+             studentid.value=(localStorage.getItem('studentid'))
+             if (localStorage.getItem('age')){
+             uname.value=(localStorage.getItem('age'))   
+         }else{
+             localStorage.removeItem('uname')
+         }
+         }
+         else{
+             localStorage.removeItem('studentid')  
+         }
+         }else{
+             localStorage.removeItem('age')
+         }
+         }</script>
+</body>
+
+</html>
